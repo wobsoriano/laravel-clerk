@@ -1,0 +1,26 @@
+{
+    "name": "wobsoriano/laravel-clerk",
+    "description": "Laravel Clerk",
+    "require": {
+        "clerkinc/backend-php": "^0.1.6"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Wobsoriano\\LaravelClerk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wobsoriano",
+            "email": "sorianorobertc@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wobsoriano\\LaravelClerk\\Providers\\ClerkServiceProvider"
+            ]
+        }
+    }
+}

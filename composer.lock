@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b43afe82cc98779b3dc1c7319c2679ba",
+    "content-hash": "bb99fcea68577bd6a3dedcc8875011eb",
     "packages": [
         {
             "name": "brick/date-time",
@@ -6696,6 +6696,44 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wobsoriano/laravel-clerk",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/laravel-clerk",
+                "reference": "a94a876eeed1e3c46166551d46b59cac38dee8ed"
+            },
+            "require": {
+                "clerkinc/backend-php": "^0.1.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wobsoriano\\LaravelClerk\\Providers\\ClerkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wobsoriano\\LaravelClerk\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "wobsoriano",
+                    "email": "sorianorobertc@gmail.com"
+                }
+            ],
+            "description": "Laravel Clerk",
+            "transport-options": {
+                "relative": true
+            }
         }
     ],
     "packages-dev": [
@@ -8976,8 +9014,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "wobsoriano/laravel-clerk": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

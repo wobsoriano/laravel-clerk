@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
         'clerk' => [
-            'driver' => 'clerk',
+            'driver' => 'clerk_session',
         ],
     ],
 
