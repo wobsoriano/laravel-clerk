@@ -12,10 +12,7 @@ class ClerkServiceProvider extends ServiceProvider
     public function boot()
     {
         Auth::extend('clerk_session', function ($app) {
-            return new ClerkGuard(
-                $app->make('request'),
-                $app->make(ClerkBackend::class)
-            );
+            return new ClerkGuard($app->make('request'));
         });
         
         $this->publishes([
