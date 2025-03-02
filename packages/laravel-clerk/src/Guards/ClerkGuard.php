@@ -20,7 +20,11 @@ class ClerkGuard implements Guard
         
         // Initialize user from payload if signed in
         if ($this->requestState->isSignedIn()) {
-            $this->user = $this->requestState->getPayload();
+            $payload = $this->requestState->getPayload();
+            $this->user = (object) [
+                'id' => $payload->sub,
+                'email' => $payload->email
+            ];
         }
     }
 
@@ -50,7 +54,7 @@ class ClerkGuard implements Guard
      */
     public function id()
     {
-        return $this->user?->sub;
+        return $this->user?->id;
     }
 
     /**
@@ -82,6 +86,7 @@ class ClerkGuard implements Guard
         $options = new AuthenticateRequestOptions(
             secretKey: config('clerk.secret_key'),
             authorizedParties: ['http://laravel-clerk.localhost'],
+            jwtKey: config('clerk.jwt_key'),
         );
 
         return AuthenticateRequest::authenticateRequest(

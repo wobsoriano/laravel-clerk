@@ -10,7 +10,7 @@
 
     @if (auth()->guard('clerk')->check())
         <p>User ID: {{ auth()->guard('clerk')->id() }}</p>
-        <p>Username: {{ auth()->guard('clerk')->user()->username }}</p>
+        <p>Username: {{ auth()->guard('clerk')->user()->email }}</p>
     @endif
 
     <div id="app"></div>

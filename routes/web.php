@@ -12,13 +12,13 @@ Route::get('/', function (ClerkClient $clerkClient) {
         createdAtAfter: 1730160000000,
     );
 
-    $response = $clerkClient->getClient()->users->get(
-        userId: 'user_2thq5ZJjHEBl4L3AgJl47VyGSCk'
-    );
-    dd($response);
+    // $response = $clerkClient->getClient()->users->get(
+    //     userId: 'user_2thq5ZJjHEBl4L3AgJl47VyGSCk'
+    // );
+    // dd($response);
 
     // dd($response);
-    // dd(auth()->guard('clerk')->id());
+    // dd(auth()->guard('clerk')->user());
 
     return view('welcome');
 });
