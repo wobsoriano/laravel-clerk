@@ -43,15 +43,15 @@ return [
 ## Usage
 
 ```php
-use Wobsoriano\LaravelClerk\Facades\ClerkBackend;
+use Wobsoriano\LaravelClerk\ClerkClient;
 
-Route::get('/api/protected', function () {
+Route::get('/api/protected', function (ClerkClient $clerkClient) {
     if (!auth()->check()) {
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     $userId = auth()->id();
-    $user = ClerkBackend::users()->get($userId);
+    $user = $clerkClient->getClient()->users->get($userId);
 
     return response()->json($user);
 });

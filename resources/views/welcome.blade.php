@@ -8,9 +8,9 @@
 <body>
     <h1>Clerk</h1>
 
-    @if (auth()->guard('clerk')->check())
-        <p>User ID: {{ auth()->guard('clerk')->id() }}</p>
-        <p>Username: {{ auth()->guard('clerk')->user()->email }}</p>
+    @if (auth()->check())
+        <p>User ID: {{ auth()->id() }}</p>
+        <p>Username: {{ auth()->user()->email }}</p>
     @endif
 
     <div id="app"></div>
