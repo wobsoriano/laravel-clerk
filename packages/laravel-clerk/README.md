@@ -1,6 +1,6 @@
 # Laravel Clerk
 
-Unofficial Laravel integration for [Clerk](https://clerk.com).
+Laravel integration for [Clerk](https://clerk.com). Access Clerk's BAPI and optionally use the custom auth guard.
 
 ## Installation
 
@@ -23,7 +23,21 @@ CLERK_SECRET_KEY=your_secret_key
 CLERK_PUBLISHABLE_KEY=your_publishable_key
 ```
 
-3. Update your `config/auth.php` to use the `clerk` guard:
+## Usage
+
+```php
+use Wobsoriano\LaravelClerk\ClerkClient;
+
+Route::get('/api/user', function (ClerkClient $clerkClient) {
+    $user = $clerkClient->getClient()->users->get('user_id');
+
+    return response()->json($user);
+});
+```
+
+## Authentication Guard (Optional)
+
+If you want to use Clerk for Laravel authentication, update your `config/auth.php`:
 
 ```php
 return [
@@ -40,7 +54,7 @@ return [
 ]
 ```
 
-## Usage
+Then you can use it like so:
 
 ```php
 use Wobsoriano\LaravelClerk\ClerkClient;
