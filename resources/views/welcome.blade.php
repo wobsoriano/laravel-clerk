@@ -14,6 +14,7 @@
     @endif
 
     <div id="app"></div>
+    <button onclick="getCurrentUser()">Get user</button>
 
     <script
     async
@@ -44,6 +45,12 @@
             Clerk.mountSignIn(signInDiv)
             }
         })
+
+        function getCurrentUser() {
+            fetch('/api/protected')
+                .then(response => response.json())
+                .then(data => console.log(data.user))
+        }
     </script>
 </body>
 </html>

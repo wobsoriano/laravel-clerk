@@ -46,11 +46,11 @@ return [
 use Wobsoriano\LaravelClerk\ClerkClient;
 
 Route::get('/api/protected', function (ClerkClient $clerkClient) {
-    if (!auth()->check()) {
+    if (!Auth::check()) {
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
-    $userId = auth()->id();
+    $userId = Auth::id();
     $user = $clerkClient->getClient()->users->get($userId);
 
     return response()->json($user);
