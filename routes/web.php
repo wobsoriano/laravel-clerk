@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Wobsoriano\LaravelClerk\ClerkClient;
+use Inertia\Inertia;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return Inertia::render('welcome');
+})->name('home');
 
 Route::get('/api/user', function (ClerkClient $clerkClient) {
     if (!Auth::check()) {
@@ -17,3 +18,9 @@ Route::get('/api/user', function (ClerkClient $clerkClient) {
 
     return response()->json($user);
 });
+
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::get('dashboard', function () {
+//         return Inertia::render('dashboard');
+//     })->name('dashboard');
+// });
