@@ -62,6 +62,19 @@ return [
 ]
 ```
 
+Then you can use it like so:
+
+```php
+use Wobsoriano\LaravelClerk\ClerkClient;
+
+Route::get('/api/protected', function (ClerkClient $clerkClient) {
+    $userId = Auth::id();
+    $user = $clerkClient->getClient()->users->get($userId)->user;
+
+    return response()->json($user);
+})->middleware('clerk.auth');
+```
+
 The package provides two middlewares for handling authentication:
 
 - `clerk.auth`: Ensures the user is authenticated, redirects to sign-in if not
@@ -82,23 +95,6 @@ Route::middleware('clerk.guest')->group(function () {
     Route::get('/sign-in', function () {
         return view('auth.sign-in');
     })->name('sign-in');
-});
-```
-
-Then you can use it like so:
-
-```php
-use Wobsoriano\LaravelClerk\ClerkClient;
-
-Route::get('/api/protected', function (ClerkClient $clerkClient) {
-    if (!Auth::check()) {
-        return response()->json(['error' => 'Unauthorized'], 401);
-    }
-
-    $userId = Auth::id();
-    $user = $clerkClient->getClient()->users->get($userId)->user;
-
-    return response()->json($user);
 });
 ```
 
