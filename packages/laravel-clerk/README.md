@@ -1,6 +1,13 @@
 # Laravel Clerk
 
-Laravel integration for [Clerk](https://clerk.com). Access Clerk's BAPI and optionally use the custom auth guard.
+> **Proof of Concept**: Laravel integration for [Clerk](https://clerk.com). This package provides a custom auth guard and Backend API integration for Clerk authentication in Laravel applications. Currently experimental and not recommended for production use.
+
+## Features
+
+- Custom authentication guard for Clerk sessions
+- JWT verification and validation
+- Backend API integration
+- Middleware for protected routes
 
 ## Installation
 
