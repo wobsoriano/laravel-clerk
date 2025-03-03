@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Wobsoriano\LaravelClerk\ClerkClient;
 use Wobsoriano\LaravelClerk\Guards\ClerkGuard;
+use Wobsoriano\LaravelClerk\Middleware\ClerkAuthenticated;
+use Wobsoriano\LaravelClerk\Middleware\ClerkGuest;
 
 final class ClerkServiceProvider extends ServiceProvider
 {
@@ -17,11 +19,6 @@ final class ClerkServiceProvider extends ServiceProvider
                 $app->make(ClerkClient::class)
             );
         });
-        
-        // Register the middlewares
-        $router = $this->app['router'];
-        $router->aliasMiddleware('clerk.auth', \Wobsoriano\LaravelClerk\Middleware\ClerkAuthenticated::class);
-        $router->aliasMiddleware('clerk.guest', \Wobsoriano\LaravelClerk\Middleware\ClerkGuest::class);
 
         if($this->app->runningInConsole()) {
             $this->publishes([
@@ -32,6 +29,10 @@ final class ClerkServiceProvider extends ServiceProvider
         $this->app->singleton(ClerkClient::class, function () {
             return new ClerkClient();
         });
+        
+        $router = $this->app['router'];
+        $router->aliasMiddleware('clerk.auth', ClerkAuthenticated::class);
+        $router->aliasMiddleware('clerk.guest', ClerkGuest::class);
       }
       
       public function register()
