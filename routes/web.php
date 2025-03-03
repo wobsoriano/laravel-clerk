@@ -9,7 +9,7 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('clerk.auth')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     })->name('settings.profile');
 });
 
-Route::middleware('guest')->group(function () {
+Route::middleware('clerk.guest')->group(function () {
     Route::get('/sign-in', function () {
         return Inertia::render('auth/sign-in');
     })->name('sign-in');
@@ -32,9 +32,3 @@ Route::middleware('guest')->group(function () {
         return Inertia::render('auth/sign-up');
     })->name('sign-up');
 });
-
-// Route::middleware(['auth', 'verified'])->group(function () {
-//     Route::get('dashboard', function () {
-//         return Inertia::render('dashboard');
-//     })->name('dashboard');
-// });

@@ -8,25 +8,18 @@ use Illuminate\Http\Request;
 use Clerk\Backend\Helpers\Jwks\AuthenticateRequest;
 use Clerk\Backend\Helpers\Jwks\AuthenticateRequestOptions;
 use Clerk\Backend\Helpers\Jwks\RequestState;
-use Illuminate\Support\Str;
+use Wobsoriano\LaravelClerk\ClerkClient;
 
 final class ClerkGuard implements Guard
 { 
     protected $user;
     protected RequestState $requestState;
+    protected ClerkClient $clerkClient;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, ClerkClient $clerkClient)
     {
+        $this->clerkClient = $clerkClient;
         $this->requestState = $this->authenticateRequest($request);
-
-        // // Initialize user from payload if signed in
-        if ($this->requestState->isSignedIn()) {
-            $payload = $this->requestState->getPayload();
-            $this->user = (object) [
-                'id' => $payload->sub,
-                'email' => $payload->email
-            ];
-        }
     }
 
     /**
@@ -47,6 +40,14 @@ final class ClerkGuard implements Guard
 
     public function user()
     {
+        if ($this->user !== null) {
+            return $this->user;
+        }
+
+        if ($this->requestState->isSignedIn()) {
+            $this->user = $this->clerkClient->getClient()->users->get($this->id())->user;
+        }
+
         return $this->user;
     }
 
@@ -55,7 +56,7 @@ final class ClerkGuard implements Guard
      */
     public function id()
     {
-        return $this->user?->id;
+        return data_get($this->requestState->getPayload(), 'sub', null);
     }
 
     /**
@@ -67,11 +68,11 @@ final class ClerkGuard implements Guard
     }
 
     /**
-     * Check if we have a user payload cached
+     * Check if we have a user bound to the guard or can retrieve one
      */
     public function hasUser()
     {
-        return $this->user !== null;
+        return $this->user !== null || ($this->requestState->isSignedIn() && $this->id() !== null);
     }
 
     /**
