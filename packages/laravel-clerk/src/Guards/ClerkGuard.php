@@ -87,7 +87,7 @@ final class ClerkGuard implements Guard
     {
         $options = new AuthenticateRequestOptions(
             secretKey: config('clerk.secret_key'),
-            authorizedParties: ['http://laravel-clerk.localhost', 'https://laravel-clerk.laravel.cloud'],
+            authorizedParties: config('clerk.authorized_parties'),
             jwtKey: config('clerk.jwt_key'),
         );
 

@@ -12,4 +12,9 @@ return [
 
     // Clerk JWT key
     "jwt_key" => env("CLERK_JWT_KEY"),
+
+    // Add authorized parties config
+    'authorized_parties' => array_filter(
+        explode(',', env('CLERK_AUTHORIZED_PARTIES', 'http://localhost')),
+    ),
 ];
