@@ -1,4 +1,4 @@
-import { Head, useForm } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import AuthLayout from '@/layouts/auth-layout';
 import { SignIn } from '@clerk/clerk-react';
 

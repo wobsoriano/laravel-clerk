@@ -22,11 +22,11 @@ createInertiaApp({
         root.render(
             <ClerkProvider
                 publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
-                afterSignOutUrl="/login"
+                afterSignOutUrl="/sign-in"
                 signInFallbackRedirectUrl="/"
                 signUpFallbackRedirectUrl="/"
-                signInUrl="/login"
-                signUpUrl="/register"
+                signInUrl="/sign-in"
+                signUpUrl="/sign-up"
             >
                 <App {...props} />
             </ClerkProvider>

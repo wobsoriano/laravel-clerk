@@ -2,7 +2,7 @@ import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useUser } from '@clerk/clerk-react';
 
-export default function Page() {
+export default function Welcome() {
     const { isLoaded, isSignedIn } = useUser();
 
     if (!isLoaded) {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wobsoriano\LaravelClerk\Providers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use Wobsoriano\LaravelClerk\ClerkClient;
 use Wobsoriano\LaravelClerk\Guards\ClerkGuard;

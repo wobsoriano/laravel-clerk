@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Clerk\Backend\Helpers\Jwks\AuthenticateRequest;
 use Clerk\Backend\Helpers\Jwks\AuthenticateRequestOptions;
 use Clerk\Backend\Helpers\Jwks\RequestState;
+use Illuminate\Support\Str;
 
 final class ClerkGuard implements Guard
 { 
@@ -17,15 +18,15 @@ final class ClerkGuard implements Guard
     public function __construct(Request $request)
     {
         $this->requestState = $this->authenticateRequest($request);
-        
+
         // // Initialize user from payload if signed in
-        // if ($this->requestState->isSignedIn()) {
-        //     $payload = $this->requestState->getPayload();
-        //     $this->user = (object) [
-        //         'id' => $payload->sub,
-        //         'email' => $payload->email
-        //     ];
-        // }
+        if ($this->requestState->isSignedIn()) {
+            $payload = $this->requestState->getPayload();
+            $this->user = (object) [
+                'id' => $payload->sub,
+                'email' => $payload->email
+            ];
+        }
     }
 
     /**
