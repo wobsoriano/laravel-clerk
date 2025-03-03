@@ -1,9 +1,5 @@
 import { LucideIcon } from 'lucide-react';
 
-export interface Auth {
-    user: User;
-}
-
 export interface BreadcrumbItem {
     title: string;
     href: string;
@@ -24,17 +20,22 @@ export interface NavItem {
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
-    auth: Auth;
+    user: User;
     [key: string]: unknown;
 }
 
 export interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
+    id: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    profileImageUrl: string;
+    emailAddresses: Array<{
+      emailAddress: string;
+      verification: {
+        status: string;
+      }
+    }>;
+    lastSignInAt: number;
+    lastActiveAt: number;
 }

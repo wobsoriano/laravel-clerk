@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Wobsoriano\LaravelClerk\ClerkClient;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -14,11 +13,9 @@ Route::middleware('clerk.auth')->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::get('/settings/profile', function (ClerkClient $clerkClient) {
-        $user = $clerkClient->getClient()->users->get(Auth::id());
-
+    Route::get('/settings/profile', function () {
         return Inertia::render('settings/profile', [
-            'user' => $user->user,
+            'user' => Auth::user(),
         ]);
     })->name('settings.profile');
 });

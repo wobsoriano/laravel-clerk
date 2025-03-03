@@ -20,18 +20,41 @@ const DotIcon = () => {
     )
 }
 
-
-const CustomPage = () => {
-    const { user } = usePage<{ user: { id: string; email: string } }>().props;
-
-    return (
-      <div>
-        <h1>Custom page</h1>
-        <p>{ JSON.stringify(user) }</p>
-      </div>
-    )
-  }
+const ProfilePage = () => {
+  const { user } = usePage<SharedData>().props;
   
+  const formatDate = (timestamp: number) => {
+    return new Date(timestamp).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  return (
+    <div>
+      <h1>Profile Information</h1>
+      <ul>
+        <li>Name: {user.firstName} {user.lastName}</li>
+        <li>Username: @{user.username}</li>
+        <li>
+          Emails:
+          <ul>
+            {user.emailAddresses.map((email, index) => (
+              <li key={index}>
+                {email.emailAddress} ({email.verification.status})
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>Last Sign In: {formatDate(user.lastSignInAt)}</li>
+        <li>Last Active: {formatDate(user.lastActiveAt)}</li>
+      </ul>
+    </div>
+  );
+};
 
 export default function Profile() {
     return (
@@ -42,7 +65,7 @@ export default function Profile() {
                 <div className="space-y-6">
                     <ClerkUserProfile>
                         <UserProfile.Page label="Custom Page" labelIcon={<DotIcon />} url="custom-page">
-                            <CustomPage />
+                            <ProfilePage />
                         </UserProfile.Page>
                     </ClerkUserProfile>
                 </div>
