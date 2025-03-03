@@ -5,8 +5,7 @@
 ## Features
 
 - Custom authentication guard for Clerk sessions
-- JWT verification and validation
-- Backend API integration
+- Backend API integration via [clerk-sdk-php](https://github.com/clerk/clerk-sdk-php)
 - Middleware for protected routes
 
 ## Installation
@@ -61,6 +60,29 @@ return [
 ]
 ```
 
+The package provides two middlewares for handling authentication:
+
+- `clerk.auth`: Ensures the user is authenticated, redirects to sign-in if not
+- `clerk.guest`: Ensures the user is not authenticated, redirects to dashboard if they are
+
+Example usage in routes:
+
+```php
+// Protected routes
+Route::middleware('clerk.auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+});
+
+// Guest routes
+Route::middleware('clerk.guest')->group(function () {
+    Route::get('/sign-in', function () {
+        return view('auth.sign-in');
+    })->name('sign-in');
+});
+```
+
 Then you can use it like so:
 
 ```php
@@ -72,7 +94,7 @@ Route::get('/api/protected', function (ClerkClient $clerkClient) {
     }
 
     $userId = Auth::id();
-    $user = $clerkClient->getClient()->users->get($userId);
+    $user = $clerkClient->getClient()->users->get($userId)->user;
 
     return response()->json($user);
 });
