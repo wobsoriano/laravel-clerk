@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wobsoriano\LaravelClerk\Providers;
 
 use Illuminate\Support\Facades\Auth;
@@ -7,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Wobsoriano\LaravelClerk\ClerkClient;
 use Wobsoriano\LaravelClerk\Guards\ClerkGuard;
 
-class ClerkServiceProvider extends ServiceProvider
+final class ClerkServiceProvider extends ServiceProvider
 {
     public function boot()
     {

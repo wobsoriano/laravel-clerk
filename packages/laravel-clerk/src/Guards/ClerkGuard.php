@@ -9,7 +9,7 @@ use Clerk\Backend\Helpers\Jwks\AuthenticateRequest;
 use Clerk\Backend\Helpers\Jwks\AuthenticateRequestOptions;
 use Clerk\Backend\Helpers\Jwks\RequestState;
 
-class ClerkGuard implements Guard
+final class ClerkGuard implements Guard
 { 
     protected $user;
     protected RequestState $requestState;
@@ -18,14 +18,14 @@ class ClerkGuard implements Guard
     {
         $this->requestState = $this->authenticateRequest($request);
         
-        // Initialize user from payload if signed in
-        if ($this->requestState->isSignedIn()) {
-            $payload = $this->requestState->getPayload();
-            $this->user = (object) [
-                'id' => $payload->sub,
-                'email' => $payload->email
-            ];
-        }
+        // // Initialize user from payload if signed in
+        // if ($this->requestState->isSignedIn()) {
+        //     $payload = $this->requestState->getPayload();
+        //     $this->user = (object) [
+        //         'id' => $payload->sub,
+        //         'email' => $payload->email
+        //     ];
+        // }
     }
 
     /**

@@ -24,7 +24,7 @@
                 "Wobsoriano\\LaravelClerk\\Providers\\ClerkServiceProvider"
             ],
             "aliases": {
-                "ClerkClient": "Wobsoriano\\LaravelClerk\\Facades\\ClerkFacade"
+                "Clerk": "Wobsoriano\\LaravelClerk\\Facades\\ClerkFacade"
             }
         }
     },

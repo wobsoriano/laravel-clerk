@@ -35,7 +35,7 @@ Route::get('/api/user', function (ClerkClient $clerkClient) {
 });
 ```
 
-## Authentication Guard (Optional)
+## Authentication Guard
 
 If you want to use Clerk for Laravel authentication, update your `config/auth.php`:
 
