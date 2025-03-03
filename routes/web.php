@@ -21,6 +21,10 @@ Route::middleware([])->group(function () {
     Route::get('/sign-up', function () {
         return Inertia::render('auth/sign-up');
     })->name('sign-up');
+
+    Route::get('/settings/profile', function () {
+        return Inertia::render('settings/profile');
+    })->name('settings.profile');
 });
 
 Route::get('/api/user', function (ClerkClient $clerkClient) {

@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { route as routeFn } from 'ziggy-js';
 import { initializeTheme } from './hooks/use-appearance';
 import { ClerkProvider } from '@clerk/clerk-react';
+import { dark } from '@clerk/themes';
 
 declare global {
     const route: typeof routeFn;
@@ -27,6 +28,7 @@ createInertiaApp({
                 signUpFallbackRedirectUrl="/"
                 signInUrl="/sign-in"
                 signUpUrl="/sign-up"
+                appearance={{ baseTheme: dark }}
             >
                 <App {...props} />
             </ClerkProvider>
