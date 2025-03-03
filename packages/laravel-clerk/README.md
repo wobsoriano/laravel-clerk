@@ -2,6 +2,8 @@
 
 > **Proof of Concept**: Laravel integration for [Clerk](https://clerk.com). This package provides a custom auth guard and Backend API integration for Clerk authentication in Laravel applications. Currently experimental and not recommended for production use.
 
+Demo: https://laravel-clerk.laravel.cloud
+
 ## Features
 
 - Custom authentication guard for Clerk sessions
