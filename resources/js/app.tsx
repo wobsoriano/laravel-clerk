@@ -29,6 +29,8 @@ createInertiaApp({
                 signInUrl="/sign-in"
                 signUpUrl="/sign-up"
                 appearance={{ baseTheme: dark }}
+                // @ts-expect-error Add type
+                initialState={props.initialPage.props.initialState}
             >
                 <App {...props} />
             </ClerkProvider>

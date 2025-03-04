@@ -13,7 +13,7 @@ use Wobsoriano\LaravelClerk\ClerkClient;
 final class ClerkGuard implements Guard
 { 
     protected $user;
-    protected RequestState $requestState;
+    private RequestState $requestState;
     protected ClerkClient $clerkClient;
 
     public function __construct(Request $request, ClerkClient $clerkClient)
@@ -106,5 +106,13 @@ final class ClerkGuard implements Guard
             $request->getContent(),
             $request->getProtocolVersion()
         );
+    }
+
+    /**
+     * Get the current request state
+     */
+    public function getRequestState(): RequestState
+    {
+        return $this->requestState;
     }
 }
